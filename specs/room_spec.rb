@@ -13,8 +13,16 @@ class TestRoom < Minitest::Test
     @room2 = Room.new("Room 2", 6)
 
     @guest1 = Guests.new("Mozzdog", 100)
+    @guest2 = Guests.new("Chimp", 80)
+    @guest3 = Guests.new("Burns", 50)
+    @guest4 = Guests.new("Heldawg", 100)
+    @guest5 = Guests.new("Alix", 100)
+    @guest6 = Guests.new("Hannah", 80)
+    @guest7 = Guests.new("Tom", 50)
+    @guests = [@guest1, @guest2, @guest3, @guest4, @guest5, @guest6, @guest7]
 
     @song1 = Song.new("Wuthering Heights", "Kate Bush")
+
     @playlist = [@song1, @song2, @song3, @song4]
 
 
@@ -48,4 +56,15 @@ class TestRoom < Minitest::Test
     @room2.add_songs(@playlist)
     assert_equal([@playlist], @room2.playlist)
   end
+
+  def test_room_has_spaces_available__true
+    result = @room1.spaces_available?
+    assert_equal(true, result)
+  end
+
+  def test_room_has_spaces_available__false
+    result = @room2.check_in(@guests) == @capacity
+    assert_equal(false, result)
+  end
+
 end
